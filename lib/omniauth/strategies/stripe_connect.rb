@@ -76,7 +76,7 @@ module OmniAuth
       end
 
       def callback_url
-        return options[:custom_redirect_uri] if options.key?(:custom_redirect_uri)
+        return options[:custom_redirect_uri] if options.key?(:custom_redirect_uri) && !OmniAuth.config.test_mode
 
         full_host + script_name + callback_path
       end

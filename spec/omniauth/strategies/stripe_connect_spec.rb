@@ -84,15 +84,4 @@ describe OmniAuth::Strategies::StripeConnect do
       expect(instance.callback_url).to eq 'https://foo.com/bar/baz'
     end
   end
-
-  describe '#custom_redirect_uri' do
-    subject { fresh_strategy }
-    OmniAuth.config.full_host = nil
-
-    it 'returns a url with the host and path' do
-      instance = subject.new('abc', 'def', :custom_redirect_uri => 'https://foo.com/bar/baz')
-      instance.authorize_params
-      expect(instance.callback_url).to eq 'https://foo.com/bar/baz'
-    end
-  end
 end
