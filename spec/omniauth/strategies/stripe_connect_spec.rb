@@ -34,6 +34,7 @@ describe OmniAuth::Strategies::StripeConnect do
     end
 
     it 'should not include redirect_uri by default' do
+      OmniAuth.config.full_host = nil
       instance = subject.new('abc', 'def')
 
       expect(instance.authorize_params[:redirect_uri]).to be_nil
@@ -65,6 +66,7 @@ describe OmniAuth::Strategies::StripeConnect do
     end
 
     it 'should not include redirect_uri by default' do
+      OmniAuth.config.full_host = nil
       instance = subject.new('abc', 'def')
 
       instance.authorize_params
@@ -74,9 +76,9 @@ describe OmniAuth::Strategies::StripeConnect do
 
   describe '#callback_url' do
     subject { fresh_strategy }
-    OmniAuth.config.full_host = 'https://foo.com/'
 
     it 'returns a url with the host and path' do
+      OmniAuth.config.full_host = 'https://foo.com/'
       instance = subject.new('abc', 'def', :callback_path => 'bar/baz')
       instance.authorize_params
       expect(instance.callback_url).to eq 'https://foo.com/bar/baz'
